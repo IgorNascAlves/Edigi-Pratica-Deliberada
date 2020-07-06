@@ -6,12 +6,6 @@ from src.author import Author
 
 class TestCaseAuthor(unittest.TestCase):
 
-    def test_CreateAuthor_AuthorSave(self):
-        name = 'Igor do Nascimento Alves'
-        email = 'igor.nascimento.flipe@gmail.com'
-        author1 = Author(name, email)
-        self.assertEqual(name, author1.name)
-
     def test_CreateAuthor_NoneName_RaiseException(self):
         name = None
         email = 'igor.nascimento.flipe@gmail.com'
