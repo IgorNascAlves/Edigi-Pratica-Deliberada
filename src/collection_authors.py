@@ -11,6 +11,3 @@ class CollectionAuthors:
         if author in self.__lista:
             raise Exception("Author with same email already registered")
         self.__lista.append(author)
-
-    def __len__(self):
-        return len(self.__lista)
