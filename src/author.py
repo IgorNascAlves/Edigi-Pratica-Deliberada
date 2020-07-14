@@ -1,6 +1,6 @@
 from datetime import datetime as dt
 
-from src.validation_utils import eh_nulo_ou_vazio, valida_email
+from src.validation_utils import is_it_null_ou_empty, check_email
 
 
 class Author:
@@ -10,13 +10,13 @@ class Author:
         self.__time = str(dt.today())
 
     def set_name(self, name) -> None:
-        if eh_nulo_ou_vazio(name):
+        if is_it_null_ou_empty(name):
             raise ValueError("Name cannot be none")
 
         self.__name = name
 
     def set_email(self, email) -> None:
-        valida_email(email)
+        check_email(email)
         self.__email = email
 
     def __eq__(self, other):
