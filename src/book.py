@@ -23,37 +23,40 @@ class Book:
     def set_title(self, title: str) -> None:
         if is_it_null_ou_empty(title):
             raise Exception("Title can not be empty or null")
-        self.title = title
+        self.__title = title
 
     def set_abstract(self, abstract: str) -> None:
         size_abstract = len(abstract)
         minimum_size = 500
         if size_abstract < minimum_size:
             raise Exception("Abstract need to be higher than 500 characters")
-        self.abstract = abstract
+        self.__abstract = abstract
 
     def set_summary(self, summary: str) -> None:
         if is_it_null_ou_empty(summary):
             raise Exception("Summary can not be empty or null")
-        self.summary = summary
+        self.__summary = summary
 
     def set_num_pages(self, num_pages: int) -> None:
         minimum_size = 0
         if num_pages <= minimum_size:
             raise Exception(f"Num pages need to be more than {minimum_size}")
-        self.num_pages = num_pages
+        self.__num_pages = num_pages
 
     def set_isbn(self, isbn: str) -> None:
         validate_isbn(isbn)
-        self.isbn = isbn
+        self.__isbn = isbn
 
     def set_edition(self, edition: int) -> None:
         if validate_if_start_with_one(edition):
             raise Exception("Edition need to start with 1")
-        self.edition = edition
+        self.__edition = edition
 
     def set_price(self, price: float) -> None:
         minimum_price = 0
         if price < minimum_price:
             raise Exception("Price need to be higher than 0 ")
-        self.price = price
+        self.__price = price
+
+    def __eq__(self, other):
+        return other.__title == self.__title
