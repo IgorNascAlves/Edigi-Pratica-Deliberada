@@ -39,13 +39,12 @@ class Book:
 
     def set_num_pages(self, num_pages: int) -> None:
         minimum_size = 0
-        if num_pages < minimum_size:
-            raise Exception("Num pages need to be >= than 0 pages")
+        if num_pages <= minimum_size:
+            raise Exception(f"Num pages need to be more than {minimum_size}")
         self.num_pages = num_pages
 
     def set_isbn(self, isbn: str) -> None:
-        if validate_isbn(isbn):
-            raise Exception("ISBN start with 978 format xxx-xx-xxxxx-xx-x")
+        validate_isbn(isbn)
         self.isbn = isbn
 
     def set_edition(self, edition: int) -> None:
