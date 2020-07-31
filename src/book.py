@@ -47,8 +47,8 @@ class Book:
         self.__isbn = isbn
 
     def set_edition(self, edition: int) -> None:
-        if self.__validate_if_start_with_one(edition):
-            raise Exception("Edition need to start with 1")
+        if str(edition)[0] != '1':
+            raise Exception("ISBN invalid - must star with 1")
         self.__edition = edition
 
     def set_price(self, price: float) -> None:
@@ -61,24 +61,7 @@ class Book:
         return other.__title == self.__title
 
     def __validate_isbn(self, isbn: str) -> None:
-        self.__validate_if_star_with_978(isbn)
-        self.__validate_format(isbn)
-
-    def __validate_if_star_with_978(self, isbn: str) -> None:
-        br_code = '978'
-        result = isbn[:3]
-        if result != br_code:
-            raise Exception("ISBN invalid - must star with " + br_code)
-
-    def __validate_format(self, isbn: str) -> None:
-        pattern = "[0-9]{3}.[0-9]{2}.[0-9]{5}.[0-9]{2}.[0-9]"
+        pattern = "978.[0-9]{2}.[0-9]{5}.[0-9]{2}.[0-9]"
         result = fullmatch(pattern, isbn)
         if result is None:
-            raise Exception("ISBN invalid - pattern xxx-xx-xxxxx-xx-x")
-
-    def __validate_if_start_with_one(self, edtion: int) -> None:
-        edtion_str = str(edtion)
-        start_with_one = '1'
-        result = edtion_str[0]
-        if result != start_with_one:
-            raise Exception("ISBN invalid - must star with " + start_with_one)
+            raise Exception("ISBN invalid - pattern 978-xx-xxxxx-xx-x")
