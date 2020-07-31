@@ -1,7 +1,6 @@
 from datetime import datetime as dt
-
-from src.validation_utils import is_it_null_ou_empty, validate_isbn,\
-    validate_if_start_with_one
+from re import fullmatch
+from src.validation_utils import is_null_or_empty
 
 
 class Book:
@@ -21,7 +20,7 @@ class Book:
         self.__time = str(dt.today())
 
     def set_title(self, title: str) -> None:
-        if is_it_null_ou_empty(title):
+        if is_null_or_empty(title):
             raise Exception("Title can not be empty or null")
         self.__title = title
 
@@ -33,7 +32,7 @@ class Book:
         self.__abstract = abstract
 
     def set_summary(self, summary: str) -> None:
-        if is_it_null_ou_empty(summary):
+        if is_null_or_empty(summary):
             raise Exception("Summary can not be empty or null")
         self.__summary = summary
 
@@ -44,11 +43,11 @@ class Book:
         self.__num_pages = num_pages
 
     def set_isbn(self, isbn: str) -> None:
-        validate_isbn(isbn)
+        self.__validate_isbn(isbn)
         self.__isbn = isbn
 
     def set_edition(self, edition: int) -> None:
-        if validate_if_start_with_one(edition):
+        if self.__validate_if_start_with_one(edition):
             raise Exception("Edition need to start with 1")
         self.__edition = edition
 
@@ -60,3 +59,26 @@ class Book:
 
     def __eq__(self, other):
         return other.__title == self.__title
+
+    def __validate_isbn(self, isbn: str) -> None:
+        self.__validate_if_star_with_978(isbn)
+        self.__validate_format(isbn)
+
+    def __validate_if_star_with_978(self, isbn: str) -> None:
+        br_code = '978'
+        result = isbn[:3]
+        if result != br_code:
+            raise Exception("ISBN invalid - must star with " + br_code)
+
+    def __validate_format(self, isbn: str) -> None:
+        pattern = "[0-9]{3}.[0-9]{2}.[0-9]{5}.[0-9]{2}.[0-9]"
+        result = fullmatch(pattern, isbn)
+        if result is None:
+            raise Exception("ISBN invalid - pattern xxx-xx-xxxxx-xx-x")
+
+    def __validate_if_start_with_one(self, edtion: int) -> None:
+        edtion_str = str(edtion)
+        start_with_one = '1'
+        result = edtion_str[0]
+        if result != start_with_one:
+            raise Exception("ISBN invalid - must star with " + start_with_one)
