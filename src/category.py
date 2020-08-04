@@ -1,6 +1,6 @@
 from datetime import datetime as dt
 
-from src.validation_utils import eh_nulo_ou_vazio
+from src.validation_utils import is_null_or_empty
 
 
 class Category:
@@ -9,7 +9,7 @@ class Category:
         self.__time = str(dt.today())
 
     def set_name(self, name) -> None:
-        if eh_nulo_ou_vazio(name):
+        if is_null_or_empty(name):
             raise ValueError("Name cannot be none")
 
         self.__name = name
