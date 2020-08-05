@@ -58,9 +58,11 @@ class Book:
         self.__price = price
 
     def __eq__(self, other):
-        if isinstance(other, Book):
-            return other.__title == self.__title
-        return other in self.__title
+        return other.__title == self.__title
+
+    @property
+    def title(self):
+        return self.__title
 
     def __validate_isbn(self, isbn: str) -> None:
         pattern = "978.[0-9]{2}.[0-9]{5}.[0-9]{2}.[0-9]"
