@@ -34,6 +34,65 @@ class TestCollectionBooks(unittest.TestCase):
 
         self.assertRaises(Exception, collection.add, book2)
 
+    def test_searchBookByTitle_return_BooksInfo(self):
+        title = "Python to ML"
+        text_search = "Py"
+
+        book = Book(title, self.abstract, self.summary,
+                    self.num_pages, self.isbn, self.author,
+                    self.category, self.edition, self.price)
+
+        collection = CollectionBooks()
+        collection.add(book)
+
+        results = collection.search(text_search)
+        first_result = results[0]
+
+        self.assertEqual(first_result.title, title)
+
+    def test_searchBookByTitle_return_MatchedBooks(self):
+        title1 = "Python to ML"
+        title2 = "Python to DS"
+        text_search = "Py"
+
+        book1 = Book(title1, self.abstract, self.summary,
+                     self.num_pages, self.isbn, self.author,
+                     self.category, self.edition, self.price)
+
+        book2 = Book(title2, self.abstract, self.summary,
+                     self.num_pages, self.isbn, self.author,
+                     self.category, self.edition, self.price)
+
+        collection = CollectionBooks()
+        collection.add(book1)
+        collection.add(book2)
+
+        results = collection.search(text_search)
+
+        self.assertEqual(2, len(results))
+
+    def test_searchBookWithTitleShorterThan2chars_raiseException(self):
+        title = "Python to ML"
+        text_search = "P"
+
+        book = Book(title, self.abstract, self.summary,
+                    self.num_pages, self.isbn, self.author,
+                    self.category, self.edition, self.price)
+
+        collection = CollectionBooks()
+        collection.add(book)
+
+        self.assertRaises(Exception, collection.search, text_search)
+
+    def test_searchForBookThatDoesntExist_return_EmptyList(self):
+        text_search = "Py"
+
+        collection = CollectionBooks()
+
+        results = collection.search(text_search)
+
+        self.assertEqual(0, len(results))
+
 
 if __name__ == '__main__':
     unittest.main()
