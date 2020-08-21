@@ -19,24 +19,18 @@ class TestCart(unittest.TestCase):
         self.collection.add(self.book1)
 
     def test_closeCart_returnSuccess(self):
-        cart = Cart(self.collection)
+        cart = Cart()
         amount = 6
         total = self.price * amount
-        cart.add(self.title, amount)
+        cart.add(self.book1, amount)
         results = cart.close()
         self.assertEqual(total, results['total'])
         self.assertEqual(amount, results[self.title])
 
-    def test_addInvalidBookInTheCart_RaiseException(self):
-        cart = Cart(self.collection)
-        amount = 6
-        title = 'Wrong title'
-        self.assertRaises(Exception, cart.add, title, amount)
-
     def test_add0ItemsInTheCart_RaiseException(self):
-        cart = Cart(self.collection)
+        cart = Cart()
         amount = 0
-        self.assertRaises(Exception, cart.add, self.title, amount)
+        self.assertRaises(Exception, cart.add, self.book1, amount)
 
 
 if __name__ == '__main__':
