@@ -64,6 +64,10 @@ class Book:
     def title(self):
         return self.__title
 
+    @property
+    def price(self):
+        return self.__price
+
     def __validate_isbn(self, isbn: str) -> None:
         pattern = "978.[0-9]{2}.[0-9]{5}.[0-9]{2}.[0-9]"
         result = fullmatch(pattern, isbn)
