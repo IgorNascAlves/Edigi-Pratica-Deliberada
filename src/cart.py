@@ -1,4 +1,5 @@
 from src.book import Book
+from src.sales import Sales
 
 from datetime import datetime as dt
 from typing import Dict, List
@@ -28,6 +29,8 @@ class Cart:
 
         resume['total'] = self.calculate_the_total()
 
-        self.__time = str(dt.today())
+        self.__time = str(dt.today().date())
+
+        Sales(time=self.__time, resume=resume.copy())
 
         return resume

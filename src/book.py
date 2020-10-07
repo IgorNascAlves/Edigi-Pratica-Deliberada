@@ -17,7 +17,7 @@ class Book:
 
         self.author = author
         self.category = category
-        self.__time = str(dt.today())
+        self.__time = str(dt.today().date())
 
     def set_title(self, title: str) -> None:
         if is_null_or_empty(title):

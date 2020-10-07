@@ -9,7 +9,7 @@ class MyTestCategory(unittest.TestCase):
     def test_CreateCategory_TimeSave(self):
         name = 'Data Science'
         category = Category(name)
-        self.assertEqual(str(dt.today()), category.time)
+        self.assertEqual(str(dt.today().date()), category.time)
 
     def test_CreateCategory_NoneName_RaiseException(self):
         name = None

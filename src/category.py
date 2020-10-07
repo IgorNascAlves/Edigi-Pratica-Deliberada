@@ -6,7 +6,7 @@ from src.validation_utils import is_null_or_empty
 class Category:
     def __init__(self, name: str):
         self.set_name(name)
-        self.__time = str(dt.today())
+        self.__time = str(dt.today().date())
 
     def set_name(self, name) -> None:
         if is_null_or_empty(name):

@@ -7,7 +7,7 @@ class Author:
     def __init__(self, name, email):
         self.set_name(name)
         self.set_email(email)
-        self.__time = str(dt.today())
+        self.__instant = str(dt.today().date())
 
     def set_name(self, name) -> None:
         if is_null_or_empty(name):
@@ -23,5 +23,13 @@ class Author:
         return other.__email == self.__email
 
     @property
-    def time(self):
-        return self.__time
+    def instant(self):
+        return self.__instant
+
+    @property
+    def name(self):
+        return self.__name
+
+    @property
+    def email(self):
+        return self.__email
